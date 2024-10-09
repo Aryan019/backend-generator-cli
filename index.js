@@ -63,6 +63,15 @@ program
     try {
       // Copy the template files to the destination path
       fs.copySync(TEMPLATE_PATH, DESTINATION_PATH);
+      
+      // Converting the change name(gitignore) to again .gitignore 
+      const gitignorePath = path.join(DESTINATION_PATH, 'gitignore');
+      const dotGitignorePath = path.join(DESTINATION_PATH, '.gitignore');
+
+      if (fs.existsSync(gitignorePath)) {
+        fs.renameSync(gitignorePath, dotGitignorePath);
+      }
+      
       console.log(
         chalk.green('\nProject structure created successfully!') +
         chalk.blue('\n\nFollow the steps to get started:') +
